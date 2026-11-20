@@ -9,7 +9,7 @@ const $=id=>document.getElementById(id),d=JSON.parse($('data').textContent);let 
 const menus=['作品紹介','登場人物','事件記録','取材地図'];
 function el(tag,txt,cls){const e=document.createElement(tag);if(txt!==undefined)e.textContent=txt;if(cls)e.className=cls;return e}
 function btn(s,fn){let b=el('button',s);b.onclick=fn;return b}
-function srcOK(s){return typeof s==='string'&&s.startsWith('data:image/')}
+function srcOK(s){return typeof s==='string'&&(s.startsWith('data:image/')||/^embedded_0[1-6]\.png$/.test(s))}
 function putImg(img,s){img.hidden=!srcOK(s);img.onerror=()=>img.hidden=true;if(srcOK(s))img.src=s;else img.removeAttribute('src')}
 function slot(s,c,label){let box=el('div',undefined,'slot '+c);box.append(el('small',label));if(srcOK(s)){let img=el('img');img.loading='lazy';img.alt=label;putImg(img,s);box.append(img)}return box}
 function kr(s){let p=el('p',s,'kr');p.lang='ko';return p}
